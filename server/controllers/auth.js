@@ -21,8 +21,8 @@ export const signup = async (req,res) => {
             email,
             password: hashedPassword,
         });
-           console.log(newUser)
-        const token = jwt.sign({ email: newUser.email, id: newUser._id },process.env.JWT_SECRET, { expiresIn: '1h' });
+         
+        const token = jwt.sign({ email: newUser.email, id: newUser._id },process.env.JWT_SECERET, { expiresIn: '1h' });
 
         res.status(200).json({ result: newUser, token })
     }
@@ -44,7 +44,7 @@ export const login = async (req,res) => {
         if(!isPasswordCrt){
             return res.status(400).json({message : "Invalid credentials"})
         }
-        const token = jwt.sign({ email : existinguser.email, id:existinguser._id}, process.env.JWT_SECRET, { expiresIn: '1h'});
+        const token = jwt.sign({ email : existinguser.email, id:existinguser._id}, process.env.JWT_SECERET, { expiresIn: '1h'});
         res.status(200).json({ result: existinguser, token })
     }catch (error) {
         res.status(500).json("Something went wrong...")
